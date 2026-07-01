@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setup Guide — Neo AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,::before,::after{box-sizing:border-box;margin:0;padding:0}:root{--primary:#0052ff;--canvas:#fff;--surface-soft:#f7f7f7;--surface-strong:#eef0f3;--hairline:#dee1e6;--ink:#0a0b0d;--body:#5b616e;--muted-text:#7c828a;--on-primary:#fff;--surface-dark:#0a0b0d;--radius:0.625rem;--radius-pill:100px;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-mono:'SF Mono','Fira Code',monospace}html{scroll-behavior:smooth;font-size:16px}body{font-family:var(--font-sans);color:var(--ink);background:var(--surface-soft);line-height:1.6;-webkit-font-smoothing:antialiased}.layout{display:flex;min-height:100vh}.sidebar{position:fixed;top:0;left:0;bottom:0;z-index:50;width:260px;background:var(--canvas);border-right:1px solid var(--hairline);display:flex;flex-direction:column;transition:transform .3s}.sidebar-header{display:flex;align-items:center;gap:8px;padding:20px 24px;border-bottom:1px solid var(--hairline)}.sidebar-logo{font-size:1.25rem;font-weight:600;letter-spacing:-.02em}.sidebar-logo .light{font-weight:300;color:var(--primary)}.sidebar-logo .norm{font-weight:400;color:var(--primary)}.sidebar-logo .bold{font-weight:700;color:var(--ink)}.sidebar-nav{flex:1;overflow-y:auto;padding:16px 12px}.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius);font-size:.875rem;font-weight:500;color:var(--body);text-decoration:none;transition:all .15s}.sidebar-nav a:hover{background:var(--surface-strong);color:var(--ink)}.sidebar-nav a.active{background:rgba(0,82,255,.08);color:var(--primary)}.sidebar-nav a .num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--surface-strong);font-size:.75rem;font-weight:600;color:var(--muted-text);flex-shrink:0}.sidebar-nav a.active .num{background:var(--primary);color:var(--on-primary)}.sidebar-toggle{display:none;position:fixed;top:16px;left:16px;z-index:60;background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--radius);padding:8px 10px;cursor:pointer;font-size:1.25rem;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.06)}.main{flex:1;margin-left:260px;min-height:100vh}.hero{background:linear-gradient(135deg,var(--canvas),var(--surface-soft));border-bottom:1px solid var(--hairline);padding:64px 64px 48px}.hero h1{font-size:2.25rem;font-weight:600;letter-spacing:-.03em;color:var(--ink);margin-bottom:12px}.hero p{font-size:1.0625rem;color:var(--body);max-width:640px;line-height:1.7}.hero .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,82,255,.08);color:var(--primary);font-size:.75rem;font-weight:600;padding:4px 12px;border-radius:var(--radius-pill);margin-bottom:16px}.content{padding:48px 64px 80px;max-width:800px}.content section{margin-bottom:56px}.content section:target{scroll-margin-top:24px}.content h2{font-size:1.5rem;font-weight:600;letter-spacing:-.02em;color:var(--ink);margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--primary)}.content h3{font-size:1.125rem;font-weight:600;color:var(--ink);margin-top:32px;margin-bottom:12px}.content h4{font-size:.9375rem;font-weight:600;color:var(--ink);margin-top:24px;margin-bottom:8px}.content p{font-size:.9375rem;color:var(--body);margin-bottom:16px;line-height:1.7}.content p strong{color:var(--ink);font-weight:600}.content ul,.content ol{margin:0 0 16px 24px;font-size:.9375rem;color:var(--body);line-height:1.7}.content li{margin-bottom:6px}.content blockquote{margin:16px 0 20px;padding:14px 20px;background:var(--surface-soft);border-left:3px solid var(--primary);border-radius:0 var(--radius) var(--radius) 0;font-size:.875rem;color:var(--body);line-height:1.6}.content blockquote strong{color:var(--ink)}.content table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:.875rem;border-radius:var(--radius);overflow:hidden}.content th{background:var(--surface-strong);color:var(--ink);font-weight:600;text-align:left;padding:10px 14px;border-bottom:1px solid var(--hairline)}.content td{padding:10px 14px;border-bottom:1px solid var(--hairline);color:var(--body)}.content code{font-family:var(--font-mono);font-size:.8125rem;background:var(--surface-strong);padding:2px 6px;border-radius:4px;color:var(--ink)}.content pre{margin:16px 0 24px;padding:20px 24px;background:var(--surface-dark);border-radius:var(--radius);overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:.8125rem;line-height:1.6;word-break:normal;white-space:pre}.content pre code{background:none;padding:0;color:#e1e4e8;font-size:inherit;word-break:normal;white-space:pre}.content img{max-width:100%;border-radius:var(--radius);border:1px solid var(--hairline);margin:16px 0;height:auto}.content img[width]{max-width:400px;width:auto}.content table{word-break:normal;white-space:nowrap}.checklist{list-style:none;margin-left:0}.checklist li{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;margin-bottom:4px;background:var(--canvas);border-radius:var(--radius);border:1px solid var(--hairline)}.checklist li .check{color:#05b169;font-size:1.125rem;flex-shrink:0}.overlay{display:none;position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.3)}.overlay.open{display:block}.content .step-note{margin:24px 0 16px;padding:16px 20px;background:rgba(0,82,255,.06);border:1px solid rgba(0,82,255,.15);border-radius:var(--radius);font-size:.875rem;color:var(--body)}.content .step-note strong{color:var(--ink)}@media(max-width:768px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.sidebar-toggle{display:block}.main{margin-left:0}.hero{padding:72px 24px 32px}.hero h1{font-size:1.625rem}.content{padding:32px 24px 64px}.content table{white-space:normal;font-size:.8125rem}.content td,.content th{padding:8px 10px}.content pre{margin:16px -12px;border-radius:0;padding:16px 20px;font-size:.75rem;width:calc(100% + 24px)}}@media(min-width:769px)and(max-width:1024px){.hero{padding:48px 40px 36px}.content{padding:40px 40px 64px}}
+</style>
+</head>
+<body>
+<div class="layout">
+<button class="sidebar-toggle" id="menuToggle" aria-label="Menu">☰</button>
+<div class="overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-header"><span class="sidebar-logo"><span class="light">n</span><span class="norm">eo</span><span class="bold">AI</span></span></div>
+<nav class="sidebar-nav">
+<a href="#s1" class="active"><span class="num">1</span> Knowledge Base</a>
+<a href="#s2"><span class="num">2</span> Settings</a>
+<a href="#s3"><span class="num">3</span> Create Proposal</a>
+<a href="#s4"><span class="num">4</span> Proposal Generation</a>
+<a href="#s5"><span class="num">5</span> Next Steps</a>
+</nav>
+</aside>
+<div class="main">
+<header class="hero">
+<span class="badge">📖 Setup Guide</span>
+<h1>Getting Started with Neo AI</h1>
+<p>After successfully deploying <strong>Smart Proposal Generator</strong>, this guide walks you through the complete setup process — from configuring your Knowledge Base to generating your first proposal.</p>
+</header>
+<div class="content">
+
+<!-- ============================================================ -->
+<!-- SECTION 1: Knowledge Base                                    -->
+<!-- ============================================================ -->
+<section id="s1">
+<h2>Step 1: Knowledge Base Setup (RAG Documents)</h2>
+<p>Start by building your <strong>Knowledge Base</strong> — this is where you'll upload documents that help the AI understand your business, brand, and past successes so it can generate more relevant proposals.</p>
+
+<img src="./image/image21.png" alt="Knowledge Base page showing the upload and document management interface">
+
+<h3>Recommended RAG Documents</h3>
+<p>For best results, upload the following types of documents to your Knowledge Base:</p>
+<ul>
+<li><strong>Company Policy Documents</strong></li>
+<li><strong>Brand Guidelines</strong> (tone of voice, values, messaging)</li>
+<li><strong>Case Studies</strong> (especially successful projects)</li>
+<li><strong>Past Proposals</strong> (your best performing ones)</li>
+<li><strong>Pricing Catalog / Service Packages</strong></li>
+</ul>
+
+<blockquote><strong>Pro Tip:</strong> Use <strong>PDF format</strong> whenever possible for the best text extraction and RAG performance.</blockquote>
+
+<h3>How to Upload RAG Documents</h3>
+<p>Follow these steps to upload documents so the AI can learn from your past work:</p>
+
+<ol>
+<li><strong>Select Document Category</strong> (Optional)<br>
+Click on the <strong>"Upload as:"</strong> dropdown and choose the appropriate category for your document. If you don't select any category, it will be automatically saved as <strong>"Others"</strong>.<br>
+<img src="./image/image22.png" width="400" alt="Upload category selection dropdown with options like 'Past Proposal', 'Case Study', 'Brand Guidelines'"></li>
+
+<li><strong>Upload the Document</strong><br>
+Click the <strong>"Upload Documents"</strong> button and select the file(s) from your computer.<br>
+<img src="./image/image25.png" width="400" alt="Upload Documents button in the Knowledge Base interface"></li>
+
+<li><strong>View Uploaded Documents</strong><br>
+Once uploaded, your documents will appear in the table below with details such as name, category, upload date, and status.<br>
+<img src="./image/image26.png" width="400" alt="Uploaded documents table showing document list with metadata"></li>
+</ol>
+
+<blockquote><strong>Note:</strong> For guidance on how to organize your RAG documents effectively, refer to the <code>RAG_Documents</code> folder included in your downloaded zip file.</blockquote>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: Settings                                          -->
+<!-- ============================================================ -->
+<section id="s2">
+<h2>Step 2: Settings Page Setup</h2>
+<p>The <strong>Settings</strong> page is your central hub for configuring the app — connect your preferred AI provider, personalize your organization's branding, and manage your team. Each configuration you complete here directly improves the quality and accuracy of the proposals you generate.</p>
+
+<h3>2.1 Configure AI Provider</h3>
+<p>Before generating proposals, connect an AI provider. The app supports <strong>OpenAI</strong>, <strong>Anthropic (Claude)</strong>, <strong>Groq</strong>, <strong>Gemini</strong>, <strong>OpenRouter</strong>, <strong>DeepSeek</strong> and <strong>Local LLM (LM Studio)</strong>.</p>
+
+<ol>
+<li><strong>Choose Your Provider</strong><br>
+Click on the provider card for the service you want to use. Supported options include:
+<ul>
+<li><strong>OpenAI</strong> — GPT-4o, GPT-4o-mini, etc.</li>
+<li><strong>Anthropic</strong> — Claude 3.5 Sonnet, Claude 3 Haiku</li>
+<li><strong>Google Gemini</strong> — Gemini 1.5 Pro, Gemini 1.5 Flash</li>
+<li><strong>Groq</strong> — Llama 3, Mixtral (fast inference)</li>
+<li><strong>OpenRouter</strong> — Unified access to multiple models</li>
+<li><strong>DeepSeek</strong> — DeepSeek-V2, DeepSeek-Coder</li>
+<li><strong>Local LLM</strong> — Run models locally via LM Studio</li>
+</ul>
+</li>
+<li><strong>Enter API Credentials</strong><br>
+Paste your API key in the <strong>"API Key"</strong> field.</li>
+<li><strong>Provide a Model Name</strong><br>
+Enter the exact model name you'd like to use for proposal generation (e.g., <code>gpt-4o</code>, <code>claude-3-sonnet-20240229</code>, <code>llama3-70b-8192</code>).<br>
+<blockquote><strong>Important:</strong> The model name must match the provider's exact model identifier. An incorrect or misspelled name will cause generation to fail. Refer to your provider's documentation for the correct model string.</blockquote>
+<img src="./image/image27.png" width="600" alt="AI Provider configuration section with provider cards and connection test button"></img>
+<li><strong>Test the Connection</strong><br>
+First click <strong>"Save AI Settings"</strong> then <strong>"Test Connection"</strong> to verify everything is set up correctly. A success dialog will confirm the connection and show response latency.<br>
+<img src="./image/image28.png" width="300" alt="AI Connection test result dialog showing success status and latency"></li>
+</ol>
+
+<blockquote><strong>Tip:</strong> For detailed configuration guidance, including proxy setup for local models, see the <a href="./AI-CONFIGURATION.md">AI Configuration Guide</a>.</blockquote>
+
+<h3>2.2 Set Up Your Organization</h3>
+<p>Personalize your organization's identity — this branding will appear on every proposal you send.</p>
+
+<ol>
+<li><strong>Upload Your Logo</strong><br>
+Click on <strong>"Upload Logo"</strong> to upload your brand logo. Supported formats: PNG, JPEG, or SVG (max 5MB). Use the <strong>"Remove Logo"</strong> button to replace or delete it.<br>
+<blockquote><strong>Note:</strong> Before uploading, make sure the <code>logos</code> storage bucket exists in your Supabase Dashboard (Settings → Storage → <code>logos</code> bucket). If you haven't created it yet, refer to the Deployment Guide step <strong>3.7 Create Storage Bucket for Logos</strong>.</blockquote></li>
+<li><strong>Set Organization Name</strong><br>
+Enter the name of your agency or company.</li>
+<li><strong>Choose Brand Color</strong><br>
+Use the color picker to select your primary brand color. This color will be used as the accent throughout your proposals.<br>
+<img src="./image/image29.png" width="600" alt="Organization Settings section showing logo upload, organization name, and brand color picker"></li>
+</ol>
+
+<blockquote><strong>Pro Tip:</strong> Uploading your logo and setting your brand color ensures that every proposal you generate looks polished and professional.</blockquote>
+
+<h3>2.3 Configure Agency Profile</h3>
+<p>The <strong>Agency Profile</strong> section feeds information about your agency directly into the AI so it can craft more personalized and relevant proposal content — especially the Executive Summary.</p>
+
+<ol>
+<li><strong>Tagline</strong> — Your agency's short, memorable statement (e.g., "Award-winning digital agency specializing in Web3 & AI").</li>
+<li><strong>Company Description</strong> — A brief overview of what your agency does, your mission, and what makes you unique.</li>
+<li><strong>Website</strong> — Your agency's website URL so the AI can reference your online presence.</li>
+<li><strong>Services Offered</strong> — Add the services you provide by typing them in and clicking <strong>"Add"</strong>. Remove any service by clicking the <strong>X</strong> icon.<br>
+<img src="./image/image30.png" width="400" alt="Agency Profile section with tagline, description, website, and services fields"></li>
+</ol>
+
+<blockquote><strong>Business Value:</strong> A well-filled agency profile helps the AI write proposals that sound like they came from your team, not a generic template.</blockquote>
+
+<h3>2.4 Invite Team Members</h3>
+<p>Collaborate with your team by inviting members to your organization. You can assign roles to control what each person can do.</p>
+
+<ol>
+<li><strong>Enter Email Address</strong> — Type the email address of the person you want to invite.</li>
+<li><strong>Select Role</strong> — Choose the appropriate role for the new member:</li>
+</ol>
+
+<table>
+<thead><tr><th>Role</th><th>Permissions</th></tr></thead>
+<tbody>
+<tr><td><strong>Admin</strong></td><td>Full access — can manage settings, team, and all proposals</td></tr>
+<tr><td><strong>Editor</strong></td><td>Can create, edit, and manage proposals; cannot change settings</td></tr>
+<tr><td><strong>Viewer</strong></td><td>Read-only access to proposals and templates</td></tr>
+</tbody>
+</table>
+
+<ol start="3">
+<li><strong>Generate Invitation</strong> — Click <strong>"Generate Invitation"</strong>. This will create an <code>invite_token</code> you can copy and share with the intended member along with instructions to join your organization.<br>
+<img src="./image/image31.png" width="400" alt="Team Members section showing invite form and member list"></li>
+</ol>
+
+<blockquote><strong>Important Note:</strong> Only <strong>Admin</strong> can send member invitations.</blockquote>
+
+<div class="step-note">
+<strong>Before moving to Step 3:</strong> Go to the <strong>Templates</strong> page and verify that all <strong>Default Templates</strong> are present. These templates are pre-seeded during deployment and are essential for creating proposals with pre-built section structures. If you don't see any templates listed, try refreshing the page or re-running the database migration to seed them.
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: Create Proposal                                   -->
+<!-- ============================================================ -->
+<section id="s3">
+<h2>Step 3: Create Your First Proposal</h2>
+<p>Once your settings and knowledge base are ready, you can start creating proposals. There are two ways to collect client intake data and generate proposals — <strong>in-app</strong> and via <strong>external widget</strong>.</p>
+
+<h3>3.1 Create a Proposal Manually (In-App)</h3>
+<p>From the <strong>Dashboard</strong> or in <strong>Proposal Page</strong>, you can create a new proposal by entering client intake information directly through the <strong>"Create Proposal"</strong> dialog. This method is ideal for phone calls, in-person meetings, or when you already have all client details at hand.</p>
+
+<ol>
+<li><strong>Open the Create Proposal Dialog</strong><br>
+From the Dashboard, click <strong>"Create New Proposal"</strong> or use the quick action card. A multi-step dialog will guide you through the process.<br>
+<img src="./image/image32.png" width="500" alt="Dashboard showing Create Proposal button and quick action cards"></li>
+
+<li><strong>Step 1 — Basic Info</strong><br>
+Enter the client's basic details:
+<ul>
+<li>Client Name</li>
+<li>Company Name</li>
+<li>Client Email & Phone</li>
+</ul>
+<img src="./image/image33.png" width="500" alt="Create Proposal dialog - Step 1 Basic Info with client name, company, and email fields"></li>
+
+<li><strong>Step 2 — Project Details</strong><br>
+Provide information about the scope of work:
+<ul>
+<li><strong>Project Title</strong> — Give your proposal a clear, descriptive title</li>
+<li><strong>Project Description</strong> — Summarize the work, goals, and deliverables (used by the AI for content generation)</li>
+</ul>
+<img src="./image/image34.png" width="500" alt="Create Proposal dialog - Step 2 Project Details with project title and description fields"></li>
+
+<li><strong>Step 3 — Budget & Timeline</strong><br>
+Set the financial and scheduling parameters:
+<ul>
+<li><strong>Budget Range</strong> — Select an estimated budget bracket</li>
+<li><strong>Timeline</strong> — Choose expected project duration</li>
+</ul>
+<img src="./image/image35.png" width="500" alt="Create Proposal dialog - Step 3 Budget and Timeline with budget range and duration options"></li>
+
+<li><strong>Step 4 — Review & Create</strong><br>
+Review all entered information, select a <strong>template</strong> if desired, and click <strong>"Create Proposal"</strong>. After creation you'll be taken to the proposal editor where you can refine content, apply AI generation, and add sections. The AI will leverage your Knowledge Base documents and Agency Profile to craft relevant content.<br>
+<img src="./image/image48.png" width="500" alt="Create Proposal dialog - Step 4 Review with summary and create button"></li>
+</ol>
+
+<h3>3.2 External Widget Integration</h3>
+<p>The <strong>Intake Widget</strong> allows potential clients to submit their project requirements directly from your website. Submissions are automatically captured and converted into draft proposals inside your app.</p>
+
+<h4>How It Works</h4>
+<p>The widget is a lightweight, embeddable form hosted on your deployed app. Clients fill out their details through a guided multi-step intake form. Once submitted, a new proposal is created in your dashboard with the status <strong>"Intake Received"</strong>.</p>
+
+<h4>Finding Your Organization Slug</h4>
+<p>The widget requires your <strong>organization slug</strong> to route submissions to the correct account. Follow these steps to find it:</p>
+
+<p><strong>Option A: From Supabase Dashboard (SQL Editor)</strong></p>
+<ol>
+<li>Go to your Supabase Dashboard → <strong>SQL Editor</strong></li>
+<li>Run the following query:<br>
+<pre><code>SELECT id, name, slug FROM public.organizations;</code></pre>
+</li>
+<li>Copy the <code>slug</code> value for your organization (e.g., <code>my-agency</code>).</li>
+</ol>
+
+<p><strong>Option B: From Supabase Dashboard (Table Editor)</strong></p>
+<ol>
+<li>Go to your Supabase Dashboard → <strong>Table Editor</strong> → <code>organizations</code></li>
+<li>Look for the <code>slug</code> column for your organization row.</li>
+</ol>
+
+<blockquote>Your organization slug is auto-generated during setup — it's a URL-friendly version of your organization name (e.g., "My Agency" becomes <code>my-agency</code>).</blockquote>
+
+<h4>Embedding on Your Website</h4>
+<p>Once you have your organization slug, follow these steps to embed the intake widget on your site:</p>
+
+<ol>
+<li><strong>Visit the Embed Demo Page</strong><br>
+Go to <code>https://your-app-domain/widget/embed-demo</code> in your browser.</li>
+<li><strong>Locate the "Iframe Embed" Section</strong><br>
+Scroll down to the <strong>Iframe Embed</strong> section. You'll see a pre-built iframe snippet with your organization slug pre-filled.</li>
+<li><strong>Copy the Embed Code</strong><br>
+Click the <strong>copy</strong> icon next to the iframe snippet.</li>
+<li><strong>Add to Your Website</strong><br>
+Paste the copied code into your website's HTML where you want the intake form to appear:<br>
+
+<img src="./image/image49.png" width="600" alt="Widget iframe embed code section on the embed demo page">
+<br>
+<strong>Replace:</strong>
+<ul>
+<li><code>https://your-app-domain</code> with your actual app URL</li>
+<li><code>YOUR_ORG_SLUG</code> with the slug you found in Supabase (e.g., <code>my-agency</code>)</li>
+</ul>
+</li>
+</ol>
+
+<p>The widget will render a responsive, step-by-step <strong>Intake Form</strong> that clients can fill out directly on your site. Submitted data is automatically captured and converted into a draft proposal in your dashboard.</p>
+<img src="./image/image37.png" width="600" alt="Widget iframe embed code section on the embed demo page">
+
+<h4>Testing the Widget</h4>
+<p>Before embedding on your live site, you can test the widget at:</p>
+<pre><code>https://your-app-domain/widget?org=YOUR_ORG_SLUG</code></pre>
+<p>This opens the full-page intake form — the same form your clients will see when embedded.</p>
+
+<h4>Widget Demo Page</h4>
+<p>You can also view an interactive demo with live code examples:</p>
+<pre><code>https://your-app.com/widget/embed-demo</code></pre>
+<p>This page shows:</p>
+<ul>
+<li>A live preview of the embed code</li>
+<li>Copy-paste ready HTML snippets</li>
+<li>REST API examples for programmatic intake submissions</li>
+</ul>
+
+<h4>Managing Intake Submissions</h4>
+<p>When a client submits the widget:</p>
+<ol>
+<li>A new proposal is created automatically in your dashboard</li>
+<li>The status is set to <strong>"Intake Received"</strong></li>
+<li>You can open the proposal, review the intake data, and generate a full proposal using AI</li>
+</ol>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: Proposal Generation & Management                  -->
+<!-- ============================================================ -->
+<section id="s4">
+<h2>Step 4: Proposal Generation & Management</h2>
+<p>This is where the app truly shines — using your Knowledge Base documents and saved settings, the AI creates a polished proposal for you. You can then refine it section by section, save different versions, and export the final result.</p>
+
+<h3>4.1 View Your Proposal</h3>
+<p>After creating a proposal, it appears in the <strong>Proposals</strong> table on the main Dashboard. Click the <strong>eye icon</strong> (👁) in the action column to view the proposal's details.</p>
+<img src="./image/image38.png" width="600" alt="Proposals table showing action column with eye icon to view proposal">
+
+<p>This opens the <strong>Proposal Overview</strong> page with three main tabs:</p>
+<ul>
+<li><strong>Overview</strong> — Quick stats, client info, and proposal summary</li>
+<li><strong>Generate AI</strong> — The AI content generation interface</li>
+<li><strong>Versions</strong> — Version history for the proposal (only appears after the first AI generation)</li>
+</ul>
+<img src="./image/image39.png" width="500" alt="Proposal Overview page with Overview, Generate AI, and Versions tabs">
+
+<h3>4.2 Generate Content with AI</h3>
+<p>The <strong>Generate AI</strong> tab is where you turn your intake data into a full proposal. Follow these steps:</p>
+
+<ol>
+<li><strong>Select a Template</strong><br>
+Choose from the list of available templates. Each provides a different structure and tone for your proposal:
+<ul>
+<li><strong>Pre-built Default Templates</strong> — A balanced, professional template covering all essential sections, seeded during deployment</li>
+<li><strong>Custom Template</strong> — Your own saved templates, which you can add via the <strong>Templates Page</strong></li>
+</ul>
+<blockquote><strong>Note:</strong> You can create and manage custom templates from the <strong>Templates</strong> page in the sidebar.</blockquote>
+<img src="./image/image40.png" width="500" alt="AI Generation tab showing template selection cards with pre-built template options"></li>
+
+<li><strong>Ensure an AI Provider is Connected</strong><br>
+Before generating, verify that you have selected and saved an <strong>AI Provider</strong> from the <strong>Settings Page</strong>. Without a configured provider, generation will not work.</li>
+
+<li><strong>Click "Generate Proposal"</strong><br>
+The AI processes the client intake data, your Knowledge Base documents, and Agency Profile to generate a complete proposal. This may take 30–60 seconds depending on the model.<br>
+<img src="./image/image41.png" width="500" alt="AI generation in progress with loading indicator"></li>
+
+<li><strong>Auto-Redirect to Editor</strong><br>
+Once generation is complete, you are automatically taken to the <strong>Proposal Editor</strong> page where the generated content appears, organized into sections.</li>
+</ol>
+
+<h3>4.3 Edit Proposal Sections</h3>
+<p>The <strong>Editor</strong> page gives you full control over every section of your proposal:</p>
+
+<ol>
+<li><strong>Navigate Sections</strong><br>
+Use the section tabs at the top of the editor to switch between different parts of the proposal (e.g., Executive Summary, Services, Pricing, Timeline). Each section can be individually edited.<br>
+<img src="./image/image42.png" width="600" alt="Proposal Editor showing section tabs for navigating through different proposal sections"></li>
+
+<li><strong>Edit Content</strong><br>
+Each section has editable text fields. You can refine the AI-generated content, add your own touch, or replace it entirely.<br>
+<img src="./image/image43.png" width="600" alt="Proposal Editor showing editable section with rich text area"></li>
+
+<li><strong>Preview as PDF & Download</strong><br>
+Click <strong>"Preview PDF"</strong> at any time to open a dialog showing exactly how the proposal will look when exported. The preview includes your organization's color scheme, name, logo, and contact information. Inside the preview, click <strong>"Download PDF"</strong> to save the file to your computer.</li>
+
+<li><strong>Save Your Work</strong></li>
+</ol>
+
+<table>
+<thead><tr><th>Action</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><strong>Save Draft</strong></td><td>Saves your progress as a draft — you can continue editing later</td></tr>
+<tr><td><strong>Save as Final Version</strong></td><td>Marks the version as final. A new version entry is created in the Versions tab</td></tr>
+</tbody>
+</table>
+<img src="./image/image44.png" width="500" alt="Editor showing Save Draft and Save Final buttons">
+
+<h3>4.4 Version Management</h3>
+<p>The <strong>Versions</strong> tab keeps a complete history of every saved version of your proposal, giving you the freedom to experiment without losing previous work.</p>
+
+<ol>
+<li><strong>Access Versions</strong><br>
+From the Proposal Overview page, click the <strong>"Versions"</strong> tab. (This tab only appears after the first AI generation.)<br>
+<img src="./image/image45.png" width="600" alt="Versions tab showing version history list"></li>
+
+<li><strong>Version History</strong><br>
+Each time you save (draft or final), a new version is recorded with:
+<ul>
+<li><strong>Version number</strong> (v1, v2, v3, etc.)</li>
+<li><strong>Status</strong> — Draft or Final</li>
+<li><strong>Timestamp</strong> — When it was saved</li>
+<li><strong>Created by</strong> — The team member who saved it</li>
+</ul>
+</li>
+
+<li><strong>Restore a Previous Version</strong><br>
+To go back to an earlier version:
+<ul>
+<li>Locate the version you want in the list</li>
+<li>Click the <strong>restore</strong> icon</li>
+<li>Confirm the restoration</li>
+<li>The editor will reload with that version's content, allowing you to continue editing from that point</li>
+</ul>
+</li>
+
+<li><strong>Re-edit Any Time</strong><br>
+You can always generate a new AI version or edit manually — every save creates a new entry in the version history, so nothing is ever lost. This means you can experiment freely with different approaches, knowing you can always revert.<br>
+<img src="./image/image46.png" width="500" alt="Version detail dialog showing version number, status, and restore option"></li>
+</ol>
+
+<h3>4.5 Export & Share</h3>
+<p>Once your proposal is ready, export it as a professional PDF:</p>
+<ol>
+<li>Click <strong>"Preview PDF"</strong> from the editor or proposal overview page.</li>
+<li>Review the rendered PDF preview — it will include your organization's branding, colors, and logo.</li>
+<li>Click <strong>"Download PDF"</strong> to save it to your computer.</li>
+<li>Share the PDF with your client via email or your preferred channel.</li>
+</ol>
+<img src="./image/image47.png" width="500" alt="PDF preview modal showing proposal rendered as a professional PDF document">
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: Next Steps                                        -->
+<!-- ============================================================ -->
+<section id="s5">
+<h2>Step 5: Next Steps</h2>
+<p>Once you've mastered the basics, here are more advanced capabilities to explore:</p>
+
+<ol>
+<li><strong>Create Custom Templates</strong> — Create a Custom reusable templates.</li>
+<li><strong>RAG Knowledge Base</strong> — Upload more documents to improve AI accuracy over time.</li>
+<li><strong>Team Collaboration</strong> — Invite editors to streamline proposal creation.</li>
+<li><strong>Widget Integration</strong> — Embed the intake widget on multiple websites to capture leads.</li>
+</ol>
+
+<hr style="margin-top:48px;border:none;border-top:1px solid var(--hairline);">
+<p style="text-align:center;color:var(--muted-text);font-size:.8125rem;margin-top:24px;"><em>For additional help, refer to the deployment, AI configuration, and local LLM guides in the <code>/docs</code> folder.</em> 🚀</p>
+</section>
+
+</div><!-- .content -->
+</div><!-- .main -->
+</div><!-- .layout -->
+
+<script>
+const s=document.getElementById('sidebar'),o=document.getElementById('overlay'),m=document.getElementById('menuToggle');
+m.onclick=()=>{s.classList.toggle('open');o.classList.toggle('open')};
+o.onclick=()=>{s.classList.remove('open');o.classList.remove('open')};
+const secs=document.querySelectorAll('section[id]'),links=document.querySelectorAll('.sidebar-nav a');
+function u(){let c='';secs.forEach(s=>{const t=window.scrollY,o=s.offsetTop-100,h=s.offsetHeight;if(t>=o&&t<o+h)c=s.id});links.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})}
+window.addEventListener('scroll',u);window.addEventListener('load',u);
+links.forEach(l=>l.addEventListener('click',()=>{if(window.innerWidth<=768){s.classList.remove('open');o.classList.remove('open')}}));
+</script>
+
+</body>
+</html>
